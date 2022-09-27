@@ -18,7 +18,7 @@
         text
         class="mr-2"
         href="relvals">
-        <span>RelVals</span>
+        <span>Requests</span>
       </v-btn>
       <v-btn
         text
