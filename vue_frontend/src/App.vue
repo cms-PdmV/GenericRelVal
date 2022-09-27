@@ -3,8 +3,8 @@
     <v-app-bar app>
       <a href="" class="no-decoration">
         <v-toolbar-title class="headline">
-          <span>Rel</span>
-          <span class="font-weight-light">Val</span>
+          <span>Generic</span>
+          <span class="font-weight-light">RelVal</span>
         </v-toolbar-title>
       </a>
       <v-spacer></v-spacer>
