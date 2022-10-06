@@ -295,7 +295,7 @@ class RelValController(ControllerBase):
         job_dict['CouchURL'] = Config.get('cmsweb_url') + '/couchdb'
         job_dict['ConfigCacheUrl'] = job_dict['CouchURL']
         job_dict['PrepID'] = prepid
-        job_dict['SubRequestType'] = 'RelVal'
+        job_dict['SubRequestType'] = 'ReDigi' # Using McM computing request type instead of standard RelVal
         job_dict['RequestString'] = relval.get_request_string()
         job_dict['Campaign'] = relval.get_campaign()
         job_dict['RequestPriority'] = 500000
