@@ -44,8 +44,11 @@ from api.relval_api import (CreateRelValAPI,
                             UpdateRelValWorkflowsAPI)
 from api.settings_api import SettingsAPI
 
-log_format = '[%(asctime)s][%(levelname)s] %(message)s'
-logging.basicConfig(format=log_format, level=logging.DEBUG)
+logger_format: str = (
+    "[%(asctime)4s : %(levelname)4s][%(filename)4s : %(name)4s : %(lineno)4s : %(funcName)4s] "
+    "%(message)4s"
+)
+logging.basicConfig(format=logger_format, level=logging.DEBUG)
 
 app = Flask(__name__,
             static_folder='./vue_frontend/dist/static',
