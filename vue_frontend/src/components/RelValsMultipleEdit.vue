@@ -2,10 +2,10 @@
   <div>
     <h1 class="page-title">
       <span class="font-weight-light">Editing</span> {{ prepids.length }}
-      <span class="font-weight-light">RelVals</span>
+      <span class="font-weight-light">requests</span>
     </h1>
     <v-card raised class="page-card">
-      <h2>List of RelVals</h2>
+      <h2>List of requests</h2>
       <ul>
         <li v-for="prepid in prepids" :key="prepid">
           <a
@@ -16,7 +16,7 @@
           >
         </li>
       </ul>
-      <h2>Values to be updated in {{ prepids.length }} RelVals</h2>
+      <h2>Values to be updated in {{ prepids.length }} requests</h2>
       <table v-if="editingObject">
         <tr>
           <td>CPU Cores (-t)</td>
@@ -430,7 +430,7 @@
               </template>
               <li v-if="step.deleted">
                 Step {{ index + 1 }} will be
-                <b>deleted in all {{ prepids.length }}</b> RelVals
+                <b>deleted in all {{ prepids.length }}</b> requests
                 <v-btn
                   small
                   class="ml-1 mb-1"

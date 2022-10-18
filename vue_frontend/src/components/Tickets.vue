@@ -50,20 +50,20 @@
               <a
                 @click="showCreateRelValsDialog(item)"
                 v-if="role('manager') && item.status == 'new'"
-                title="Create RelVals from this ticket"
-                >Create RelVals</a
+                title="Create requests from this ticket"
+                >Create requests</a
               >
               <a
                 :href="'relvals?ticket=' + item.prepid"
                 v-if="item.created_relvals && item.created_relvals.length > 0"
-                title="Show all RelVals created from this ticket"
-                >Show RelVals</a
+                title="Show all requests created from this ticket"
+                >Show requests</a
               >
               <a
                 :href="'api/tickets/relvals_workflows/' + item.prepid"
                 target="_blank"
                 v-if="item.created_relvals && item.created_relvals.length > 0"
-                title="Show a list of computing workflows of RelVals created from this ticket"
+                title="Show a list of computing workflows of requests created from this ticket"
                 >List for RelMon</a
               >
               <a
@@ -167,7 +167,7 @@
           <template v-slot:item.created_relvals="{ item }">
             <span v-if="item.created_relvals && item.created_relvals.length > 0"
               ><a :href="'relvals?ticket=' + item.prepid"
-                >{{ item.created_relvals.length }} RelVals:</a
+                >{{ item.created_relvals.length }} Requests:</a
               ></span
             >
             <ul>
@@ -345,7 +345,7 @@ export default {
         { dbName: "command_steps", displayName: "Command Steps", visible: 0 },
         {
           dbName: "created_relvals",
-          displayName: "Created RelVals",
+          displayName: "Created requests",
           visible: 0,
         },
         {
@@ -564,11 +564,11 @@ export default {
     },
     showCreateRelValsDialog: function (ticket) {
       let component = this;
-      this.dialog.title = "Create RelVals for " + ticket.prepid + "?";
+      this.dialog.title = "Create requests for " + ticket.prepid + "?";
       this.dialog.description =
-        "Are you sure you want to generate RelVals for " +
+        "Are you sure you want to generate requests for " +
         ticket.prepid +
-        " ticket? After RelVals are created, this ticket cannot be modified, additional workflows will require a new ticket.";
+        " ticket? After requests are created, this ticket cannot be modified, additional workflows will require a new ticket.";
       this.dialog.ok = function () {
         component.loading = true;
         component.loadingCreatingRelVals = true;
@@ -588,7 +588,7 @@ export default {
             component.loadingCreatingRelVals = false;
             component.loading = false;
             component.showError(
-              "Error creating RelVals",
+              "Error creating requests",
               component.getError(error)
             );
           });

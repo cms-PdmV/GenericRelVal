@@ -40,12 +40,12 @@
               <a
                 :href="'relvals/edit?clone=' + item.prepid"
                 v-if="role('manager')"
-                title="Clone RelVal"
+                title="Clone request"
                 >Clone</a
               >
               <a
                 :href="'api/relvals/get_cmsdriver/' + item.prepid"
-                title="Show cmsDriver.py command for this RelVal"
+                title="Show cmsDriver.py command for this request"
                 >cmsDriver</a
               >
               <a
@@ -75,7 +75,7 @@
                 v-if="
                   role('administrator') && item.status == 'submitted' && !isDev
                 "
-                title="Update RelVal information from Stats2"
+                title="Update request information from Stats2"
                 >Update from Stats2</a
               >
               <a
@@ -87,12 +87,12 @@
                     item.status == 'archived') &&
                   !isDev
                 "
-                title="Show workflows of this RelVal in Stats2"
+                title="Show workflows of this request in Stats2"
                 >Stats2</a
               >
               <a
                 :href="'tickets?created_relvals=' + item.prepid"
-                title="Show ticket that was used to create this RelVal"
+                title="Show ticket that was used to create this request"
                 >Ticket</a
               >
             </div>
@@ -100,7 +100,7 @@
           <template v-slot:item.prepid="{ item }">
             <a
               :href="'relvals?prepid=' + item.prepid"
-              title="Show only this RelVal"
+              title="Show only this request"
               >{{ item.prepid }}</a
             >
           </template>
@@ -239,7 +239,7 @@
                 'relvals?cmssw_release=*' + parseRelease(item.cmssw_release)
               "
               :title="
-                'Show all RelVals with ' +
+                'Show all requests with ' +
                 parseRelease(item.cmssw_release) +
                 ' CMSSW release'
               "
@@ -258,7 +258,7 @@
                 ><a
                   :href="'relvals?scram_arch=' + item.scram_arch"
                   :title="
-                    'Show all RelVals with ' + item.scram_arch + ' SCRAM arch'
+                    'Show all requests with ' + item.scram_arch + ' SCRAM arch'
                   "
                   >{{ item.scram_arch }}</a
                 ></small
@@ -269,7 +269,7 @@
             <a
               :href="'relvals?batch_name=' + item.batch_name"
               :title="
-                'Show all RelVals with ' + item.batch_name + ' batch name'
+                'Show all requests with ' + item.batch_name + ' batch name'
               "
               >{{ item.batch_name }}</a
             >
@@ -286,7 +286,7 @@
                   item.campaign_timestamp
                 "
                 :title="
-                  'Show RelVals in ' +
+                  'Show requests in ' +
                   parseRelease(item.cmssw_release) +
                   '__' +
                   item.batch_name +
@@ -309,14 +309,14 @@
           <template v-slot:item.status="{ item }">
             <a
               :href="'relvals?status=' + item.status"
-              :title="'Show all RelVals with status ' + item.status"
+              :title="'Show all requests with status ' + item.status"
               >{{ item.status }}</a
             >
           </template>
           <template v-slot:item.matrix="{ item }">
             <a
               :href="'relvals?matrix=' + item.matrix"
-              :title="'Show all RelVals with ' + item.matrix + ' matrix'"
+              :title="'Show all requests with ' + item.matrix + ' matrix'"
               >{{ item.matrix }}</a
             >
           </template>
@@ -324,7 +324,7 @@
             <a
               :href="'relvals?sample_tag=' + item.sample_tag"
               :title="
-                'Show all RelVals with ' + item.sample_tag + ' sample tag'
+                'Show all requests with ' + item.sample_tag + ' sample tag'
               "
               >{{ item.sample_tag }}</a
             >
@@ -332,7 +332,7 @@
           <template v-slot:item.label="{ item }">
             <a
               :href="'relvals?label=' + item.label"
-              :title="'Show all RelVals with ' + item.label + ' label'"
+              :title="'Show all requests with ' + item.label + ' label'"
               >{{ item.label }}</a
             >
           </template>
@@ -423,7 +423,7 @@
         <a
           :href="'relvals/edit'"
           v-if="role('manager') && !selectedItems.length"
-          >New RelVal</a
+          >New request</a
         >
         <span v-if="role('manager') && selectedItems.length"
           >Selected items ({{ selectedItems.length }}) actions:</span
@@ -431,37 +431,37 @@
         <a
           v-if="role('manager') && selectedItems.length"
           @click="editRelVals(selectedItems)"
-          title="Edit selected RelVals"
+          title="Edit selected requests"
           >Edit</a
         >
         <a
           v-if="role('manager') && selectedItems.length"
           @click="deleteRelVals(selectedItems)"
-          title="Delete selected RelVals"
+          title="Delete selected requests"
           >Delete</a
         >
         <a
           v-if="role('manager') && selectedItems.length"
           @click="previousStatus(selectedItems)"
-          title="Move selected RelVals to previous status"
+          title="Move selected requests to previous status"
           >Previous</a
         >
         <a
           v-if="role('manager') && selectedItems.length"
           @click="nextStatus(selectedItems)"
-          title="Move selected RelVals to next status"
+          title="Move selected requests to next status"
           >Next</a
         >
         <a
           v-if="role('administrator') && selectedItems.length"
           @click="updateWorkflows(selectedItems)"
-          title="Update selected RelVals' information from Stats2"
+          title="Update selected requests' information from Stats2"
           >Update from Stats2</a
         >
         <a
           v-if="selectedItems.length"
           @click="openPmpMany(selectedItems)"
-          title="Show selected RelVals in pMp"
+          title="Show selected requests in pMp"
           >pMp</a
         >
       </div>
@@ -698,7 +698,7 @@ export default {
           component.loading = false;
           component.clearDialog();
           component.showError(
-            "Error fetching RelVals",
+            "Error fetching requests",
             component.getError(error)
           );
         });
@@ -756,9 +756,9 @@ export default {
     },
     deleteRelVals: function (relvals) {
       let component = this;
-      this.dialog.title = "Delete " + relvals.length + " RelVals?";
+      this.dialog.title = "Delete " + relvals.length + " requests?";
       this.dialog.description =
-        "Are you sure you want to delete " + relvals.length + " RelVals?";
+        "Are you sure you want to delete " + relvals.length + " requests?";
       this.dialog.ok = function () {
         component.loading = true;
         axios
@@ -772,7 +772,7 @@ export default {
             component.loading = false;
             component.clearDialog();
             component.showError(
-              "Error deleting RelVals",
+              "Error deleting requests",
               component.getError(error)
             );
             component.selectedItems = [];
@@ -796,14 +796,14 @@ export default {
             component.loading = false;
             component.clearDialog();
             component.showError(
-              "Error moving RelVal to next status",
+              "Error moving request to next status",
               component.getError(error)
             );
             component.selectedItems = [];
           });
       };
       let showDataWarning = false;
-      // Iterate through all RelVals and see if there are any that have --data and are approved
+      // Iterate through all requests and see if there are any that have --data and are approved
       for (let relval of relvals) {
         for (let step of relval.steps) {
           if (step.driver.data && relval.status == "approved") {
@@ -816,9 +816,9 @@ export default {
         }
       }
       if (showDataWarning) {
-        this.dialog.title = "Make sure RelVal datasets are available on disk";
+        this.dialog.title = "Make sure request datasets are available on disk";
         this.dialog.description =
-          "Please make sure that data RelVals have required dataset blocks on a disk. List of datasets <a href='https://twiki.cern.ch/twiki/bin/view/CMS/Run2DataForRelVals' target='_blank'>can be found on TWiki</a>";
+          "Please make datasets required by the request are available on disk. List of datasets <a href='https://twiki.cern.ch/twiki/bin/view/CMS/Run2DataForRelVals' target='_blank'>can be found on TWiki</a>";
         this.dialog.ok = submit;
         this.dialog.cancel = this.clearDialog;
         this.dialog.visible = true;
@@ -830,18 +830,18 @@ export default {
       let component = this;
       if (relvals.length > 1) {
         this.dialog.title =
-          "Move " + relvals.length + " RelVals to previous status?";
+          "Move " + relvals.length + " requests to previous status?";
         this.dialog.description =
           "Are you sure you want to move " +
           relvals.length +
-          " RelVals to previous status?";
+          " requests to previous status?";
       } else {
         this.dialog.title =
-          "Move " + relvals[0].prepid + " RelVal to previous status?";
+          "Move " + relvals[0].prepid + " request to previous status?";
         this.dialog.description =
           "Are you sure you want to move " +
           relvals[0].prepid +
-          " RelVal to previous status?";
+          " request to previous status?";
       }
       this.dialog.ok = function () {
         component.loading = true;
@@ -856,7 +856,7 @@ export default {
             component.loading = false;
             component.clearDialog();
             component.showError(
-              "Error moving RelVal to previous status",
+              "Error moving request to previous status",
               component.getError(error)
             );
             component.selectedItems = [];
@@ -881,7 +881,7 @@ export default {
           component.loading = false;
           component.clearDialog();
           component.showError(
-            "Error updating RelVal info",
+            "Error updating request info",
             component.getError(error)
           );
           component.selectedItems = [];
