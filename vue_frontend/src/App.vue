@@ -8,62 +8,56 @@
         </v-toolbar-title>
       </a>
       <v-spacer></v-spacer>
-      <v-btn
-        text
-        class="mr-2"
-        href="tickets">
+      <v-btn text class="mr-2" href="tickets">
         <span>Tickets</span>
       </v-btn>
-      <v-btn
-        text
-        class="mr-2"
-        href="relvals">
+      <v-btn text class="mr-2" href="relvals">
         <span>Requests</span>
       </v-btn>
-      <v-btn
-        text
-        class="mr-2"
-        href="dashboard">
+      <v-btn text class="mr-2" href="dashboard">
         <span>Dashboard</span>
       </v-btn>
       <v-spacer></v-spacer>
       <div v-if="userInfo">
-        <span :title="'Username: ' + userInfo.username + '\nRole: ' + userInfo.role"><small>Logged in as</small> {{userInfo.fullname}} </span>
-        <img class="admin-star" :title="'User role: ' + userInfo.role" :src="userRolePicture"/>
+        <span
+          :title="'Username: ' + userInfo.username + '\nRole: ' + userInfo.role"
+          ><small>Logged in as</small> {{ userInfo.fullname }}
+        </span>
+        <img
+          class="admin-star"
+          :title="'User role: ' + userInfo.role"
+          :src="userRolePicture"
+        />
       </div>
     </v-app-bar>
     <v-main class="content-container">
-      <router-view/>
+      <router-view />
     </v-main>
   </v-app>
 </template>
 
 <script>
-
-import { roleMixin } from './mixins/UserRoleMixin.js'
+import { roleMixin } from "./mixins/UserRoleMixin.js";
 
 export default {
-  name: 'App',
+  name: "App",
 
-  mixins: [
-    roleMixin
-  ],
+  mixins: [roleMixin],
   computed: {
-    userRolePicture: function() {
+    userRolePicture: function () {
       if (this.userInfo.role_index == 1) {
-        return 'static/star.png';
+        return "static/star.png";
       }
       if (this.userInfo.role_index == 2) {
-        return 'static/admin_star.png';
+        return "static/admin_star.png";
       }
-      return 'static/invisible.png';
-    }
-  }
+      return "static/invisible.png";
+    },
+  },
 };
 </script>
 
 <style scoped>
-
 header {
   background: var(--v-background-base) !important;
 }
@@ -84,11 +78,9 @@ a.no-decoration {
   width: 16px;
   height: 16px;
 }
-
 </style>
 
 <style>
-
 html {
   overflow: auto !important;
 }
@@ -101,14 +93,16 @@ footer {
   bottom: 0px;
   position: fixed;
   background: var(--v-background-base) !important;
-  box-shadow: 0px -2px 4px -1px rgba(0, 0, 0, 0.2), 0px -4px 5px 0px rgba(0, 0, 0, 0.14), 0px -1px 10px 0px rgba(0, 0, 0, 0.12);
+  box-shadow: 0px -2px 4px -1px rgba(0, 0, 0, 0.2),
+    0px -4px 5px 0px rgba(0, 0, 0, 0.14), 0px -1px 10px 0px rgba(0, 0, 0, 0.12);
 }
 
 table {
   white-space: nowrap;
 }
 
-.notes, .fragment {
+.notes,
+.fragment {
   font-size: 0.85em;
   font-style: monospace;
   margin: 4px;
@@ -122,16 +116,16 @@ table {
 }
 
 .v-application th.text-start {
-  color: rgba(0,0,0,0.87) !important;
+  color: rgba(0, 0, 0, 0.87) !important;
   font-size: 0.9em !important;
 }
 
 .mdi-checkbox-marked::before {
-  color: var(--v-accent-base) !important
+  color: var(--v-accent-base) !important;
 }
 
 .theme--light.v-label {
-  color: rgba(0,0,0,0.87) !important;
+  color: rgba(0, 0, 0, 0.87) !important;
 }
 
 h1.page-title {
@@ -205,15 +199,15 @@ h1.page-title {
   opacity: 1;
 }
 
-@media all and (max-width:650px){
-  .page-card td{
-      display: block;
-      width: 100%;
-      padding: 1px 0;
+@media all and (max-width: 650px) {
+  .page-card td {
+    display: block;
+    width: 100%;
+    padding: 1px 0;
   }
-  .page-card tr{
-      display: block;
-      margin-bottom: 6px;
+  .page-card tr {
+    display: block;
+    margin-bottom: 6px;
   }
 }
 
@@ -226,11 +220,10 @@ a:hover {
 }
 
 .actions > a:not(:last-of-type):after {
-  color: rgba(0,0,0,0.87);
+  color: rgba(0, 0, 0, 0.87);
   content: "|";
   margin-left: 3px;
   margin-right: 3px;
-  display: inline-block
+  display: inline-block;
 }
-
 </style>
